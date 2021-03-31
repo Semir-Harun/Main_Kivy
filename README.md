@@ -1,33 +1,38 @@
-# Kivy_Kivy
+# My_Kivy
 
-import kivy
+<MyGrid>:
 
-from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
-from kivy.uix.widget import Widget
-from kivy.properties import ObjectProperty
+    name: name
+    email: email
 
-
-class MyGrid(Widget):
-    name = ObjectProperty(None)
-    email = ObjectProperty(None)
-
-    def btn(self):
-        print("Name:", self.name.text, "email:", self.email.text)
-        self.name.text = ""
-        self.email.text = ""
+    GridLayout:
+        cols:1
+        size: root.width -200, root.height -200
+        pos: 100, 100
 
 
+        GridLayout:
+            cols:2
 
 
-
-class MyApp(App):
-    def build(self):
-        return MyGrid()
+            Label:
+                text: "Name: "
 
 
-if __name__ == "__main__":
-    MyApp().run()
+            TextInput:
+                id: name
+                multiline:False
+
+
+            Label:
+                text: "Email: "
+
+
+            TextInput:
+                id: email
+                multinline:False
+
+
+        Button:
+            text:"Submit"
+            on_press: root.btn()
