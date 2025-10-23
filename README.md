@@ -1,59 +1,32 @@
 # Main_Kivy
 
-import kivy
+A simple Kivy application that demonstrates a basic user input form.
 
-kivy.require('1.11.1')
+## Screenshot
 
-from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
+![App Screenshot](placeholder.png)
 
+## How to Run
 
-class MyGrid(GridLayout):
-    def __init__(self, **kwargs):
-        super(MyGrid, self).__init__(**kwargs)
-        self.cols = 1
+1. Clone the repository:
+   ```
+   git clone https://github.com/Semir-Harun/Main-Kivy.git
+   ```
+2. Install the dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+3. Run the application:
+   ```
+   python main.py
+   ```
 
-        self.inside = GridLayout()
-        self.inside.cols = 2
+## Dependencies
 
-        self.inside.add_widget(Label(text="First Name: "))
-        self.name = TextInput(multiline=False)
-        self.inside.add_widget(self.name)
+- Kivy==1.11.1
 
-        self.inside.add_widget(Label(text="Last Name: "))
-        self.lastName = TextInput(multiline=False)
-        self.inside.add_widget(self.lastName)
+## Future Features
 
-        self.inside.add_widget(Label(text="Email: "))
-        self.email = TextInput(multiline=False)
-        self.inside.add_widget(self.email)
-
-        self.add_widget(self.inside)
-
-        self.submit = Button(text="Submit", font_size=40)
-        self.submit.bind(on_press=self.pressed)
-        self.add_widget(self.submit)
-
-    def pressed(self, instance):
-        name = self.name.text
-        last = self.lastName.text
-        email = self.email.text
-
-
-        print("Name:", name, "Last Name:", last, "Email:", email)
-        self.name.text = ""
-        self.lastName.text = ""
-        self.email.text = ""
-
-
-class MyApp(App):
-    def build(self):
-        return MyGrid()
-        # return Label(text="Tech With Sam")
-
-
-if __name__ == "__main__":
-    MyApp().run()
+- Add form validation.
+- Store user input in a database.
+- Improve the UI.
