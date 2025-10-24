@@ -1,12 +1,10 @@
 import kivy
-
-kivy.require('1.11.1')
-
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+from utils import validate_form_data
 
 
 class MyGrid(GridLayout):
@@ -36,12 +34,23 @@ class MyGrid(GridLayout):
         self.add_widget(self.submit)
 
     def pressed(self, instance):
-        name = self.name.text
-        last = self.lastName.text
-        email = self.email.text
+        name = self.name.text.strip()
+        last = self.lastName.text.strip()
+        email = self.email.text.strip()
 
+        # Use the validation utility
+        is_valid, errors = validate_form_data(name, last, email)
+        
+        if not is_valid:
+            print("Validation errors:")
+            for error in errors:
+                print(f"  - {error}")
+            return
 
         print("Name:", name, "Last Name:", last, "Email:", email)
+        print("Form submitted successfully!")
+        
+        # Clear the form
         self.name.text = ""
         self.lastName.text = ""
         self.email.text = ""
